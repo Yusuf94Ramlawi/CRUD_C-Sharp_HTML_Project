@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Departments</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body class="text-center">
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Factory management</a>
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" aria-current="page">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Employee.html">Employees</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Department.html">Departments <span class="visually-hidden">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Shift.html">Shifts</a>
+                    </li>
+                </ul>
+                <h3 class="text-white" id="username"></h3>
+            </div>
+        </div>
+    </nav>
+</header>
+<main class="container">
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="d-grid gap-2">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
+                    onclick="newModal();">Add Department</button>
+            </div>
+        </div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Manager Name</th>
+                    <th scope="col">Tools</th>
+                </tr>
+            </thead>
+            <tbody id="DepartmentTable">
+                
+            </tbody>
+        </table>
+    </div>
+
+        
+    <!-- Modal Body -->
+    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Department Editor </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="Modal_body" class="modal-body">
+                    <div class="row">
+                    ID <input type="text" name="ID" id="ID" disabled/>
+                    </div>
+                    <div class="row">
+                    Name <input type="text" name="name" id="name" />
+                    </div>
+                    <div class="row">
+                    Manager ID <input type="text" name="manager_id" id="manager_id" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" onclick="SaveData()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- Optional: Place to the bottom of scripts -->
+    <script>
+        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+    </script>
+
+
+  </main>
+  <script>
+    var DepartmentTable = document.getElementById("DepartmentTable");
+
+    async function GetData() {
+        DepartmentTable.innerText = "";
+
+        var response = await fetch("http://localhost:51911/api/Department");
+        var DepartmentData = await response.json();
+        DepartmentData.forEach(Department => {
+            var tr = document.createElement("tr");
+            var DepartmentID_td = document.createElement("td");
+            DepartmentID_td.innerText = Department.ID;
+            var DepartmentName_td = document.createElement("td");
+            DepartmentName_td.innerText = Department.name;
+            var DepartmentManager_td = document.createElement("td");
+            DepartmentManager_td.innerText = Department.manager_name;
+
+            var Tools = document.createElement("td");
+
+            var DepartmentEditButton = document.createElement("button");
+            DepartmentEditButton.type = "button"
+            DepartmentEditButton.innerText = "Edit"
+            DepartmentEditButton.classList = "btn btn-primary"
+            DepartmentEditButton.onclick= () => {window.location.href = `department_details.html?id=${Department.ID}`}  
+
+
+            var DepartmentDeleteButton = document.createElement("button");
+            DepartmentDeleteButton.type = "button"
+            DepartmentDeleteButton.innerText = "Delete"
+            DepartmentDeleteButton.classList = "btn btn-danger"
+            DepartmentDeleteButton.setAttribute("onclick", `DeleteData(${Department.ID})`);
+
+            Tools.appendChild(DepartmentEditButton);
+            Tools.appendChild(DepartmentDeleteButton); // todo.. Only if there wasn't any employee
+
+            tr.appendChild(DepartmentID_td);
+            tr.appendChild(DepartmentName_td);
+            tr.appendChild(DepartmentManager_td);
+            tr.appendChild(Tools);
+
+            DepartmentTable.appendChild(tr);
+        });
+
+    };
+    
+
+    function newModal(){
+        document.getElementById("ID").value = "";
+        document.getElementById("name").value = "";
+        document.getElementById("manager_id").value = "";
+    }
+
+    async function SaveData(){
+        var ID = document.getElementById("ID").value;
+        var new_name = document.getElementById("name").value;
+        var new_managerID = document.getElementById("manager_id").value;
+
+        if(ID != ""){
+            await fetch(`http://localhost:51911/api/Department/${ID}`, {
+                method: "PUT",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({"name": new_name, "manager_id": new_managerID})
+            });
+        } else{
+            await fetch("http://localhost:51911/api/Department", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({"name": new_name, "manager_id": new_managerID})
+            });
+        }
+
+        GetData()
+            sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
+
+    }
+
+    async function DeleteData(id){
+        await fetch(`http://localhost:51911/api/Department/${id}`,{
+            method: "DELETE",
+            headers: {"Content-Type": "application/json"},
+        })
+        GetData()
+            sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
+
+    }
+
+
+    GetData()
+
+    var username = document.getElementById("username")
+    if (sessionStorage.getItem("username") && +sessionStorage.getItem("number_of_action") < 8) {
+        username.innerText = `Hello ${sessionStorage.getItem("username")}`;
+    } else {
+        window.location.href = "index.html";
+    }
+
+
+  </script>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

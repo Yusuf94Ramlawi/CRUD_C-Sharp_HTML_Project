@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Employeess</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body class="text-center">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">Factory management</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="Employee.html">Employees <span class="visually-hidden">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Department.html">Departments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Shift.html">Shifts</a>
+                        </li>
+                    </ul>
+                <h3 class="text-white" id="username"></h3>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <br>
+        <div class="row">
+            <div class="col">
+                <div class="d-grid gap-2">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
+                        onclick="newModal();">Add Employees</button>
+                </div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col"></div>
+        </div>
+        <hr>
+        <input type="text" name="search" id="search" placeholder="Search... " />
+        <br><br>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Start Work Year</th>
+                        <th scope="col">Department Name</th>
+                        <th scope="col">Tools</th>
+                    </tr>
+                </thead>
+                <tbody id="EmployeesTable">
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Employees Editor </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id="Modal_body" class="modal-body">
+                        <div class="row">
+                            ID <input type="text" name="ID" id="ID" disabled />
+                        </div>
+                        <div class="row">
+                            First Name <input type="text" name="first_name" id="first_name" />
+                        </div>
+                        <div class="row">
+                            Last Name <input type="text" name="last_name" id="last_name" />
+                        </div>
+                        <div class="row">
+                            Start Work Year <input type="text" name="start_work_year" id="start_work_year" />
+                        </div>
+                        <div class="row">
+                            Department ID <input type="text" name="department_id" id="department_id" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" onclick="SaveData()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Optional: Place to the bottom of scripts -->
+        <script>
+            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+        </script>
+
+
+    </main>
+    <script>
+        var EmployeesTable = document.getElementById("EmployeesTable");
+
+        async function GetData() {
+            EmployeesTable.innerText = "";
+
+            var response = await fetch("http://localhost:51911/api/Employees");
+            var EmployeesData = await response.json();
+            EmployeesData.forEach(Employees => {
+                var tr = document.createElement("tr");
+                var EmployeesID_td = document.createElement("td");
+                EmployeesID_td.innerText = Employees.ID;
+                var EmployeesFirstName_td = document.createElement("td");
+                EmployeesFirstName_td.innerText = Employees.first_name;
+                var EmployeesLastName_td = document.createElement("td");
+                EmployeesLastName_td.innerText = Employees.last_name;
+                var EmployeesDate_td = document.createElement("td");
+                EmployeesDate_td.innerText = Employees.start_work_year;
+                var EmployeesDepartment_td = document.createElement("td");
+                EmployeesDepartment_td.innerText = Employees.department_id;
+
+
+
+                var EmployeeShiftList = document.createElement("td");
+                EmployeesDepartment_td.innerText = Employees.department_id;
+
+                var Tools = document.createElement("td");
+
+                var EmployeesEditButton = document.createElement("button");
+                EmployeesEditButton.type = "button"
+                EmployeesEditButton.innerText = "Edit"
+                EmployeesEditButton.classList = "btn btn-primary"
+                EmployeesEditButton.setAttribute("data-bs-toggle", "modal")
+                EmployeesEditButton.setAttribute("data-bs-target", "#modalId")
+
+
+                document.getElementById("ID").value = Employees.ID;
+                document.getElementById("first_name").value = Employees.first_name;
+                document.getElementById("last_name").value = Employees.last_name;
+                document.getElementById("start_work_year").value = Employees.start_work_year;
+                document.getElementById("department_id").value = Employees.department_id;
+
+
+                var EmployeesDeleteButton = document.createElement("button");
+                EmployeesDeleteButton.type = "button"
+                EmployeesDeleteButton.innerText = "Delete"
+                EmployeesDeleteButton.classList = "btn btn-danger"
+                EmployeesDeleteButton.setAttribute("onclick", `DeleteData(${Employees.ID})`);
+
+                Tools.appendChild(EmployeesEditButton);
+                Tools.appendChild(EmployeesDeleteButton);
+
+                tr.appendChild(EmployeesID_td);
+                tr.appendChild(EmployeesFirstName_td);
+                tr.appendChild(EmployeesLastName_td);
+                tr.appendChild(EmployeesDate_td);
+                tr.appendChild(EmployeesDepartment_td);
+                tr.appendChild(Tools);
+
+                EmployeesTable.appendChild(tr);
+            });
+
+        };
+
+
+        function newModal() {
+            document.getElementById("ID").value = "";
+            document.getElementById("first_name").value = "";
+            document.getElementById("last_name").value = "";
+            document.getElementById("start_work_year").value = "";
+            document.getElementById("department_id").value = "";
+        }
+
+        async function SaveData() {
+            var ID = document.getElementById("ID").value;
+            var new_first_name = document.getElementById("first_name").value;
+            var new_last_name = document.getElementById("last_name").value;
+            var new_start_work_year = document.getElementById("start_work_year").value;
+            var new_department_id = document.getElementById("department_id").value;
+
+            if (ID != "") {
+                await fetch(`http://localhost:51911/api/Employees/${ID}`, {
+                    method: "PUT",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({"first_name": new_first_name, "last_name": new_last_name, "start_work_year": new_start_work_year, "department_id": new_department_id})
+                });
+            } else {
+                await fetch("http://localhost:51911/api/Employees", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({"first_name": new_first_name, "last_name": new_last_name, "start_work_year": new_start_work_year, "department_id": new_department_id})
+                });
+            }
+
+            GetData()
+            sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
+
+        }
+
+        async function DeleteData(id) {
+            await fetch(`http://localhost:51911/api/Employees/${id}`, {
+                method: "DELETE",
+                headers: {"Content-Type": "application/json"},
+            })
+            GetData()
+            sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
+        }
+
+
+        GetData()
+
+        var username = document.getElementById("username")
+        if (sessionStorage.getItem("username") && +sessionStorage.getItem("number_of_action") < 8){
+            username.innerText = `Hello ${sessionStorage.getItem("username")}`;
+        } else{
+            window.location.href = "index.html";
+        }
+
+
+    </script>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Shifts</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body class="text-center">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">Factory management</a>
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Employee.html">Employees</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Department.html">Departments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="Shift.html">Shifts <span class="visually-hidden">(current)</span></a>
+                        </li>
+                    </ul>
+                    <h3 class="text-white" id="username"></h3>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <br>
+        <div class="row">
+            <div class="col">
+            <div class="d-grid gap-2">
+                <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
+                    onclick="newModal();">Add Shifts</button>
+            </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+        </div>
+        <hr>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Start Time</th>
+                        <th scope="col">End Time</th>
+                        <th scope="col">Employee</th>
+                    </tr>
+                </thead>
+                <tbody id="ShiftsTable">
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal Body -->
+        <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+        <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+            role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitleId">Shifts Editor </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div id="Modal_body" class="modal-body">
+                        <div class="row">
+                            ID <input type="text" name="ID" id="ID" disabled />
+                        </div>
+                        <div class="row">
+                            Date <input type="date" name="date" id="date" />
+                        </div>
+                        <div class="row">
+                            Start time <input type="text" name="start_time" id="start_time" />
+                        </div>
+                        <div class="row">
+                            End Date <input type="text" name="end_time" id="end_time" />
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success" onclick="SaveData()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Optional: Place to the bottom of scripts -->
+        <script>
+            const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+        </script>
+
+
+    </main>
+    <script>
+        var ShiftsTable = document.getElementById("ShiftsTable");
+
+        async function GetData() {
+            ShiftsTable.innerText = "";
+
+            var response = await fetch("http://localhost:51911/api/Shifts");
+            var ShiftsData = await response.json();
+
+            await ShiftsData.forEach(async Shifts => {
+                var tr = document.createElement("tr");
+
+                var ShiftsID_td = document.createElement("td");
+                ShiftsID_td.innerText = Shifts.ID;
+                var Shiftsdate_td = document.createElement("td");
+                Shiftsdate_td.innerText = Shifts.date;
+                var Shiftsstart_time_td = document.createElement("td");
+                Shiftsstart_time_td.innerText = Shifts.start_time;
+                var Shiftsend_time_td = document.createElement("td");
+                Shiftsend_time_td.innerText = Shifts.end_time;
+
+                var shiftList = document.createElement("ul");
+
+                var response2 = await fetch(`http://localhost:51911/api/Shifts/${Shifts.ID}`);
+                var data2 = await response2.json();
+                if(data2 != null){
+                    
+                    data2.forEach(employee => {
+                        var a = document.createElement("a");
+                        a.href = `employee_page?id=${employee.ID}`
+                        var li = document.createElement("li");
+                        a.innerText = employee.first_name + " " + employee.last_name;
+                        li.appendChild(a);
+                        shiftList.appendChild(li);
+                    });
+                }
+
+                tr.appendChild(ShiftsID_td);
+                tr.appendChild(Shiftsdate_td);
+                tr.appendChild(Shiftsstart_time_td);
+                tr.appendChild(Shiftsend_time_td);
+                tr.appendChild(shiftList);
+
+                ShiftsTable.appendChild(tr);
+                
+            });
+
+        };
+
+
+        function newModal() {
+            document.getElementById("ID").value = "";
+            document.getElementById("date").value = "";
+            document.getElementById("start_time").value = "";
+            document.getElementById("end_time").value = "";
+        }
+
+        async function SaveData() {
+            var ID = document.getElementById("ID").value;
+            var new_date = document.getElementById("date").value;
+            var new_start_time = document.getElementById("start_time").value;
+            var new_end_time = document.getElementById("end_time").value;
+
+            await fetch("http://localhost:51911/api/Shifts", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({"date": new_date, "start_time": new_start_time, "end_time": new_end_time})
+            });
+
+            GetData()
+            sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
+
+        }
+
+        function Goto(id){
+            document.location.href = `Shift_info.html?id=${id}`;
+        }
+
+
+        GetData()
+
+    var username = document.getElementById("username")
+    if (sessionStorage.getItem("username") && +sessionStorage.getItem("number_of_action") < 8) {
+        username.innerText = `Hello ${sessionStorage.getItem("username")}`;
+    } else {
+        window.location.href = "index.html";
+    }
+
+
+    </script>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
