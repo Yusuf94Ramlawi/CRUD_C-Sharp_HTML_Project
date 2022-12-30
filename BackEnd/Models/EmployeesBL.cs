@@ -5,13 +5,32 @@ using System.Web;
 
 namespace FinalProject.Models
 {
+    public partial class EmployeeWithDepartment
+    {
+        public int ID { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public int start_work_year { get; set; }
+        public string department_name { get; set; }
+    }
     public class EmployeesBL
     {
         masterEntities db = new masterEntities();
 
-        public List<Employee> GetEmployees()
+        public List<EmployeeWithDepartment> GetEmployees()
         {
-            List<Employee> employees = db.Employees.ToList();
+            List<EmployeeWithDepartment> employees = (from emp in db.Employees
+                                        join dep in db.Departments
+                                        on emp.department_id equals dep.ID
+                                        select new EmployeeWithDepartment
+                                        {
+                                            ID = emp.ID,
+                                            first_name = emp.first_name,
+                                            last_name = emp.last_name,
+                                            start_work_year = emp.start_work_year,
+                                            department_name = dep.name
+
+                                        }).ToList();
             return employees;
         }
 

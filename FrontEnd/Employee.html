@@ -68,6 +68,7 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Start Work Year</th>
                         <th scope="col">Department Name</th>
+                        <th scope="col">Shifts</th>
                         <th scope="col">Tools</th>
                     </tr>
                 </thead>
@@ -119,6 +120,7 @@
 
 
     </main>
+    <script src="checkUser.js"></script>
     <script>
         var EmployeesTable = document.getElementById("EmployeesTable");
 
@@ -138,12 +140,12 @@
                 var EmployeesDate_td = document.createElement("td");
                 EmployeesDate_td.innerText = Employees.start_work_year;
                 var EmployeesDepartment_td = document.createElement("td");
-                EmployeesDepartment_td.innerText = Employees.department_id;
+                EmployeesDepartment_td.innerText = Employees.department_name;
 
 
 
                 var EmployeeShiftList = document.createElement("td");
-                EmployeesDepartment_td.innerText = Employees.department_id;
+                EmployeeShiftList.innerText = "";
 
                 var Tools = document.createElement("td");
 
@@ -151,8 +153,8 @@
                 EmployeesEditButton.type = "button"
                 EmployeesEditButton.innerText = "Edit"
                 EmployeesEditButton.classList = "btn btn-primary"
-                EmployeesEditButton.setAttribute("data-bs-toggle", "modal")
-                EmployeesEditButton.setAttribute("data-bs-target", "#modalId")
+                EmployeesEditButton.setAttribute("onclick", `window.location.href = "employee_page.html?id=${Employees.ID}"`);
+
 
 
                 document.getElementById("ID").value = Employees.ID;
@@ -168,6 +170,13 @@
                 EmployeesDeleteButton.classList = "btn btn-danger"
                 EmployeesDeleteButton.setAttribute("onclick", `DeleteData(${Employees.ID})`);
 
+                var EmployeesAddShiftButton = document.createElement("button");
+                EmployeesAddShiftButton.type = "button"
+                EmployeesAddShiftButton.innerText = "Add Shift"
+                EmployeesAddShiftButton.classList = "btn btn-info"
+                EmployeesAddShiftButton.setAttribute("onclick", `window.location.href = "add_emp_shift.html?id=${Employees.ID}"`);
+
+                Tools.appendChild(EmployeesAddShiftButton);
                 Tools.appendChild(EmployeesEditButton);
                 Tools.appendChild(EmployeesDeleteButton);
 
@@ -176,6 +185,7 @@
                 tr.appendChild(EmployeesLastName_td);
                 tr.appendChild(EmployeesDate_td);
                 tr.appendChild(EmployeesDepartment_td);
+                tr.appendChild(EmployeeShiftList);
                 tr.appendChild(Tools);
 
                 EmployeesTable.appendChild(tr);
@@ -230,14 +240,7 @@
 
         GetData()
 
-        var username = document.getElementById("username")
-        if (sessionStorage.getItem("username") && +sessionStorage.getItem("number_of_action") < 8){
-            username.innerText = `Hello ${sessionStorage.getItem("username")}`;
-        } else{
-            window.location.href = "index.html";
-        }
-
-
+        username.innerText = `Hello ${userSession.full_name}`;
     </script>
     <footer>
         <!-- place footer here -->

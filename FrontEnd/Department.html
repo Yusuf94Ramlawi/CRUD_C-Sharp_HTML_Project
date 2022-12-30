@@ -109,6 +109,7 @@
 
 
   </main>
+    <script src="checkUser.js"></script>
   <script>
     var DepartmentTable = document.getElementById("DepartmentTable");
 
@@ -142,7 +143,7 @@
             DepartmentDeleteButton.setAttribute("onclick", `DeleteData(${Department.ID})`);
 
             Tools.appendChild(DepartmentEditButton);
-            Tools.appendChild(DepartmentDeleteButton); // todo.. Only if there wasn't any employee
+            Tools.appendChild(DepartmentDeleteButton); 
 
             tr.appendChild(DepartmentID_td);
             tr.appendChild(DepartmentName_td);
@@ -166,19 +167,12 @@
         var new_name = document.getElementById("name").value;
         var new_managerID = document.getElementById("manager_id").value;
 
-        if(ID != ""){
-            await fetch(`http://localhost:51911/api/Department/${ID}`, {
-                method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({"name": new_name, "manager_id": new_managerID})
-            });
-        } else{
-            await fetch("http://localhost:51911/api/Department", {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({"name": new_name, "manager_id": new_managerID})
-            });
-        }
+        await fetch("http://localhost:51911/api/Department", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({"name": new_name, "manager_id": new_managerID})
+        });
+        alert("Added.");
 
         GetData()
             sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
@@ -190,22 +184,15 @@
             method: "DELETE",
             headers: {"Content-Type": "application/json"},
         })
+        alert("Done. if there's Employee in the department we willn't delete it.");
         GetData()
             sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
-
     }
 
 
     GetData()
 
-    var username = document.getElementById("username")
-    if (sessionStorage.getItem("username") && +sessionStorage.getItem("number_of_action") < 8) {
-        username.innerText = `Hello ${sessionStorage.getItem("username")}`;
-    } else {
-        window.location.href = "index.html";
-    }
-
-
+    username.innerText = `Hello ${userSession.full_name}`;
   </script>
   <footer>
     <!-- place footer here -->

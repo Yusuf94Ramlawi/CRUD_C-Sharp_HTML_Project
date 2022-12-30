@@ -12,7 +12,6 @@ namespace FinalProject.Models
         public string name { get; set; }
         public int manager_id { get; set; }
         public string manager_name { get; set; }
-        public bool isEmployee { get; set; } = false;
     }
 
     public class DepartmentBL

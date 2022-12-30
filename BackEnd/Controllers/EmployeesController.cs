@@ -17,7 +17,7 @@ namespace FinalProject.Controllers
         public static EmployeesBL bl = new EmployeesBL();
 
         // GET: api/Employees
-        public IEnumerable<Employee> Get()
+        public IEnumerable<EmployeeWithDepartment> Get()
         {
             return bl.GetEmployees();
         }

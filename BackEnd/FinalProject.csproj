@@ -170,6 +170,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\EmployeeShiftsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ShiftsController.cs" />
@@ -185,6 +186,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeesBL.cs" />
+    <Compile Include="Models\EmployeeShiftsBL.cs" />
     <Compile Include="Models\Employee_shift.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -64,7 +64,7 @@
                         <th scope="col">Date</th>
                         <th scope="col">Start Time</th>
                         <th scope="col">End Time</th>
-                        <th scope="col">Employee</th>
+                        <th scope="col">Employees</th>
                     </tr>
                 </thead>
                 <tbody id="ShiftsTable">
@@ -114,6 +114,7 @@
 
 
     </main>
+    <script src="checkUser.js"></script>
     <script>
         var ShiftsTable = document.getElementById("ShiftsTable");
 
@@ -135,22 +136,22 @@
                 var Shiftsend_time_td = document.createElement("td");
                 Shiftsend_time_td.innerText = Shifts.end_time;
 
-                var shiftList = document.createElement("ul");
+                var shiftList = document.createElement("td");
 
-                var response2 = await fetch(`http://localhost:51911/api/Shifts/${Shifts.ID}`);
+                var response2 = await fetch(`http://localhost:51911/api/EmployeeShifts/${Shifts.ID}`);
                 var data2 = await response2.json();
                 if(data2 != null){
-                    
+                    var shiftUl = document.createElement("ul");
                     data2.forEach(employee => {
-                        var a = document.createElement("a");
-                        a.href = `employee_page?id=${employee.ID}`
                         var li = document.createElement("li");
+                        var a = document.createElement("a");
+                        a.href = `employee_page.html?id=${employee.ID}`
                         a.innerText = employee.first_name + " " + employee.last_name;
                         li.appendChild(a);
-                        shiftList.appendChild(li);
+                        shiftUl.appendChild(li);
                     });
+                    shiftList.appendChild(shiftUl)
                 }
-
                 tr.appendChild(ShiftsID_td);
                 tr.appendChild(Shiftsdate_td);
                 tr.appendChild(Shiftsstart_time_td);
@@ -182,27 +183,16 @@
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({"date": new_date, "start_time": new_start_time, "end_time": new_end_time})
             });
+            alert("Added.");
 
             GetData()
             sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
 
         }
 
-        function Goto(id){
-            document.location.href = `Shift_info.html?id=${id}`;
-        }
-
-
         GetData()
 
-    var username = document.getElementById("username")
-    if (sessionStorage.getItem("username") && +sessionStorage.getItem("number_of_action") < 8) {
-        username.innerText = `Hello ${sessionStorage.getItem("username")}`;
-    } else {
-        window.location.href = "index.html";
-    }
-
-
+    username.innerText = `Hello ${userSession.full_name}`;
     </script>
     <footer>
         <!-- place footer here -->

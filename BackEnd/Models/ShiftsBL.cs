@@ -1,33 +1,39 @@
-﻿using System;
+﻿using Microsoft.Ajax.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace FinalProject.Models
 {
+    public class Employeesshift
+    {
+        public int ID { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public int shift_id { get; set; }
+    }
+
     public class ShiftsBL
     {
         new masterEntities db = new masterEntities();
 
         public List<Shift> GetShifts()
         {
-            List<Shift> shifts = db.Shifts.ToList();
-            return shifts;
-        }
-        public List<Employee> GetShift(int id)
-        {
-            try {
-                List<Employee> Employeesshift = (from emp_shift in db.Employee_shift
-                                                 join employee in db.Employees on
-                                                 emp_shift.employee_id equals employee.ID
-                                                 where emp_shift.shift_id == id
-                                                 select employee
-                                              ).ToList();
-                return Employeesshift;
-
+            try { 
+            IQueryable<Shift> shifts = db.Shifts;
+            return shifts.ToList();
             }
             catch { return null; }
-
+        }
+        public Shift GetShift(int id)
+        {
+            try
+            {
+                IQueryable<Shift> shifts = db.Shifts;
+                return shifts.Where(x => x.ID == id).FirstOrDefault();
+            }
+            catch { return null; }
         }
 
         public void AddShift(Shift shift)

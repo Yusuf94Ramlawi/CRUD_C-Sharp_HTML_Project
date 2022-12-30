@@ -21,7 +21,7 @@ namespace FinalProject.Controllers
         }
 
         // GET: api/Shifts/5
-        public List<Employee> Get(int id)
+        public Shift Get(int id)
         {
             return bl.GetShift(id);
         }

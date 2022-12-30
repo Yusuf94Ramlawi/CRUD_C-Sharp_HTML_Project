@@ -44,21 +44,19 @@
           body: JSON.stringify({username, password})
         });
         var isUser = await response.json();
+
         if (!isUser) {
           alert("Wrong User Credential");
         } else {
-          sessionStorage.setItem("username", isUser.full_name);
-          if (sessionStorage.getItem("number_of_action")) {
-            if (sessionStorage.getItem("number_of_action") > 8) {
-              alert("You Reach Your Maximum Actions Please try anotherday !")
-            }
-          } else {
-            sessionStorage.setItem("number_of_action", 0);
+          sessionStorage.setItem("user", JSON.stringify(isUser));
+          var userSession = JSON.parse(sessionStorage.getItem("user"));
 
+          if (userSession.number_of_action > 8) {
+            alert("You Reach Your Maximum Actions Please try anotherday !")
+          } else{
+            window.location.href = "index.html";
           }
-          window.location.href = "index.html";
         }
-
       };
     </script>
   </body>

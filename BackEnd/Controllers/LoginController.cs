@@ -21,6 +21,10 @@ namespace FinalProject.Controllers
             User isUser = bl.CheckLogin(login);
             return isUser;
         }
+
+        public void Put(int id, User user)
+        {
+            bl.EditUser(id, user);
+        }
     }
 }
-
