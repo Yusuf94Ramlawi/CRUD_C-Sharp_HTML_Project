@@ -45,19 +45,46 @@
     </header>
     <main class="container">
         <br>
-        <div class="row">
-            <div class="col">
-                <div class="d-grid gap-2">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
-                        onclick="newModal();">Add Employees</button>
-                </div>
+    
+        <form action="emp_search.html" method="get">
+            <div class="row">
+            <div class="mb-3 col">
+              <label for="first_name_search" class="form-label">First Name</label>
+              <input type="text"
+                class="form-control" name="first_name_search" id="first_name_search" aria-describedby="for_first_name_search" placeholder="FirstName">
+              <small id="for_first_name_search" class="form-text text-muted">enter for search</small>
             </div>
-            <div class="col">
+            <div class="mb-3 col">
+                <label for="last_name_search" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name_search" id="last_name_search"
+                    aria-describedby="for_last_name_search" placeholder="lastName">
+                <small id="for_last_name_search" class="form-text text-muted">enter for search</small>
             </div>
-            <div class="col"></div>
-        </div>
+            <div class="mb-3 col">
+                <label for="department_search" class="form-label">Department</label>
+                <input type="text" class="form-control" name="department_search" id="department_search"
+                    aria-describedby="for_department_search" placeholder="Department">
+                <small id="for_department_search" class="form-text text-muted">enter for search</small>
+            </div>
+            <div class="mb-3 col" style="align-self: center;">
+                <input class="button btn btn-primary" type="submit" value="Search..." type="submit">
+            </div>
+            </div>
+        
+        </form>
         <hr>
-        <input type="text" name="search" id="search" placeholder="Search... " />
+<div class="row">
+    <div class="col">
+        <div class="d-grid gap-2">
+            <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
+                onclick="newModal();">Add Employees</button>
+        </div>
+    </div>
+    <div class="col">
+    </div>
+    <div class="col"></div>
+</div>
+<hr>
         <br><br>
         <div class="table-responsive">
             <table class="table table-hover">
