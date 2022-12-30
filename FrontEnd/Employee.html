@@ -142,8 +142,6 @@
                 var EmployeesDepartment_td = document.createElement("td");
                 EmployeesDepartment_td.innerText = Employees.department_name;
 
-
-
                 var EmployeeShiftList = document.createElement("td");
                 EmployeeShiftList.innerText = "";
 
@@ -179,6 +177,21 @@
                 Tools.appendChild(EmployeesAddShiftButton);
                 Tools.appendChild(EmployeesEditButton);
                 Tools.appendChild(EmployeesDeleteButton);
+
+                
+                
+                if(Employees.shifts != null){
+                    var shifts = Employees.shifts
+                    var shiftUl = document.createElement("ul");
+                    shifts.forEach(async shiftID => {
+                        var shiftResponse = await fetch(`http://localhost:51911/api/shifts/${shiftID.shift_id}`);
+                        var shiftData = await shiftResponse.json();
+                        var li = document.createElement("li");
+                        li.innerText = `${shiftData.date} : ${shiftData.start_time} - ${shiftData.end_time}`
+                        shiftUl.appendChild(li)
+                    });
+                    EmployeeShiftList.appendChild(shiftUl)
+                }
 
                 tr.appendChild(EmployeesID_td);
                 tr.appendChild(EmployeesFirstName_td);

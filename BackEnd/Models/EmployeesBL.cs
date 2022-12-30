@@ -12,6 +12,7 @@ namespace FinalProject.Models
         public string last_name { get; set; }
         public int start_work_year { get; set; }
         public string department_name { get; set; }
+        public List<Employee_shift> shifts { get; set; }
     }
     public class EmployeesBL
     {
@@ -19,6 +20,7 @@ namespace FinalProject.Models
 
         public List<EmployeeWithDepartment> GetEmployees()
         {
+
             List<EmployeeWithDepartment> employees = (from emp in db.Employees
                                         join dep in db.Departments
                                         on emp.department_id equals dep.ID
@@ -31,6 +33,10 @@ namespace FinalProject.Models
                                             department_name = dep.name
 
                                         }).ToList();
+            foreach (EmployeeWithDepartment employee in employees)
+            {
+                employee.shifts = db.Employee_shift.Where(x => x.employee_id == employee.ID).ToList();
+            }
             return employees;
         }
 
