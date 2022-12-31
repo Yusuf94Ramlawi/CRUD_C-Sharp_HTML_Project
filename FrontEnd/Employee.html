@@ -129,7 +129,9 @@
                             Start Work Year <input type="text" name="start_work_year" id="start_work_year" />
                         </div>
                         <div class="row">
-                            Department ID <input type="text" name="department_id" id="department_id" />
+                            Department ID
+                            <select class="form-select form-select-md" name="department_id" id="department_id">
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -181,8 +183,6 @@
                 EmployeesEditButton.classList = "btn btn-primary"
                 EmployeesEditButton.setAttribute("onclick", `window.location.href = "employee_page.html?id=${Employees.ID}"`);
 
-
-
                 document.getElementById("ID").value = Employees.ID;
                 document.getElementById("first_name").value = Employees.first_name;
                 document.getElementById("last_name").value = Employees.last_name;
@@ -205,8 +205,6 @@
                 Tools.appendChild(EmployeesAddShiftButton);
                 Tools.appendChild(EmployeesEditButton);
                 Tools.appendChild(EmployeesDeleteButton);
-
-                
                 
                 if(Employees.shifts != null){
                     var shiftUl = document.createElement("ul");
@@ -233,13 +231,26 @@
 
         };
 
+        async function GetDepartment() {
+                var department_id = document.getElementById("department_id")
+                var response = await fetch("http://localhost:51911/api/Department");
+                var department = await response.json();
+                department.forEach(dep => {
+                    var optionEl = document.createElement("option")
+                    optionEl.setAttribute("value", dep.ID);
+                    var t = document.createTextNode(dep.name);
+                    optionEl.appendChild(t);
+                    department_id.appendChild(optionEl)
+                });
+            }
 
-        function newModal() {
+        async function newModal() {
             document.getElementById("ID").value = "";
             document.getElementById("first_name").value = "";
             document.getElementById("last_name").value = "";
             document.getElementById("start_work_year").value = "";
-            document.getElementById("department_id").value = "";
+            document.getElementById("department_id").innerHTML = "<option selected disabled>please select ....</option>";
+            await GetDepartment();
         }
 
         async function SaveData() {
@@ -262,6 +273,8 @@
                     body: JSON.stringify({"first_name": new_first_name, "last_name": new_last_name, "start_work_year": new_start_work_year, "department_id": new_department_id})
                 });
             }
+
+            
 
             GetData()
             sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
