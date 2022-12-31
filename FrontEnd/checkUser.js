@@ -17,10 +17,11 @@ async function AddAction(){
     });
     var data = await response.json();
     sessionStorage.setItem("user", JSON.stringify(data));
-    
-    if(+userSession.number_of_action > action_limitation){
+    userSession = JSON.parse(sessionStorage.getItem("user"));
+
+    if(userSession.num_of_action > action_limitation){
         alert("Yor are out of moves!")
-        window.location.href = "login.html";
+        logOut();
     }
 }
 
