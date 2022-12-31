@@ -91,7 +91,7 @@
                     Name <input type="text" name="name" id="name" />
                     </div>
                     <div class="row">
-                    Manager ID <input type="text" name="manager_id" id="manager_id" />
+                    Manager Name <select name="manager_id" id="manager_id"></select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -155,12 +155,28 @@
         });
 
     };
+
+    async function GetManager() {
+        var manager_id = document.getElementById("manager_id")
+        var response = await fetch("http://localhost:51911/api/Employees");
+        var manager = await response.json();
+        manager.forEach(emp => {
+            var optionEl = document.createElement("option")
+            optionEl.setAttribute("value", emp.ID);
+            var t = document.createTextNode(emp.first_name + " " + emp.last_name);
+            optionEl.appendChild(t);
+            manager_id.appendChild(optionEl)
+        });
+    }
     
 
-    function newModal(){
+    async function newModal(){
         document.getElementById("ID").value = "";
         document.getElementById("name").value = "";
         document.getElementById("manager_id").value = "";
+        document.getElementById("manager_id").innerHTML = "<option selected disabled>please select ....</option>";
+        await GetManager();
+
     }
 
     async function SaveData(){

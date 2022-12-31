@@ -49,13 +49,30 @@
         <div class="row">
        ID <input type="text" name="ID" id="ID" disabled>
        name <input type="text" name="name" id="name">
-       manager_id <input type="text" name="manager_id" id="manager_id">
+       Manager Name <select name="manager_id" id="manager_id"></select>
+
     </div>
          <button type="button" onclick="window.location.href = 'Department.html'" class="btn btn-secondary">Back</button>
          <button type="button" onclick="SaveData();" class="btn btn-primary">Save..</button>
     </main>
     <script src="checkUser.js"></script>
     <script>
+
+        async function GetManager(id) {
+                var manager_id = document.getElementById("manager_id")
+                var response = await fetch("http://localhost:51911/api/Employees");
+                var manager = await response.json();
+                manager.forEach(emp => {
+                    var optionEl = document.createElement("option")
+                    optionEl.setAttribute("value", emp.ID);
+                    var t = document.createTextNode(emp.first_name + " " + emp.last_name);
+                    optionEl.appendChild(t);
+                    if (emp.ID == id) {
+                        optionEl.selected = true;
+                    }
+                    manager_id.appendChild(optionEl)
+                });
+            }
         
         async function GetData() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -64,7 +81,8 @@
             var DepartmentData = await response.json();
             document.getElementById("ID").value = DepartmentData.ID;
             document.getElementById("name").value = DepartmentData.name;
-            document.getElementById("manager_id").value = DepartmentData.manager_id;
+            await GetManager(DepartmentData.manager_id);
+
         }
 
         async function SaveData() {
