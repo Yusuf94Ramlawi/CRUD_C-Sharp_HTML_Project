@@ -1,11 +1,17 @@
-var actions_limit= 8;
-try {
-    var userSession = JSON.parse(sessionStorage.getItem("user"));
-} catch (error) {
+var userSession = JSON.parse(sessionStorage.getItem("user"));
+if(!userSession){
     window.location.href = "login.html";
 }
 
-if(+userSession.number_of_action > actions_limit){
-    alert("Go Out!")
+function logOut() {
+    sessionStorage.removeItem("user");
     window.location.href = "login.html";
 }
+
+
+
+// var action_limitation = 8;
+// if(+userSession.number_of_action > action_limitation){
+//     alert("Go Out!")
+//     window.location.href = "login.html";
+// }
