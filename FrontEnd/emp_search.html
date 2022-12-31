@@ -117,17 +117,17 @@
     <script src="checkUser.js"></script>
     <script>
         var EmployeesTable = document.getElementById("EmployeesTable");
+        const urlParams = new URLSearchParams(window.location.search);
+        const first_name_search = urlParams.get('first_name_search');
+        const last_name_search = urlParams.get('last_name_search');
+        const department_search = urlParams.get('department_search');
 
         async function GetData() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const first_name_search = urlParams.get('first_name_search');
-            const last_name_search = urlParams.get('last_name_search');
-            const department_search = urlParams.get('department_search');
-
             EmployeesTable.innerText = "";
 
             var response = await fetch("http://localhost:51911/api/Employees");
             var EmployeesData = await response.json();
+
             EmployeesData.forEach(Employees => {
                 if(Employees.first_name == first_name_search || Employees.last_name == last_name_search || Employees.department_name == department_search){
                     var tr = document.createElement("tr");

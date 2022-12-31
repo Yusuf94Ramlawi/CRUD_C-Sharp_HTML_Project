@@ -5,23 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="masterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Department">
+        <EntityType Name="Departments">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="manager_id" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="start_work_year" Type="int" Nullable="false" />
-          <Property Name="department_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee_shift">
           <Key>
@@ -31,7 +21,17 @@
           <Property Name="employee_id" Type="int" Nullable="false" />
           <Property Name="shift_id" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Shift">
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="start_work_year" Type="int" Nullable="false" />
+          <Property Name="department_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shifts">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -40,7 +40,17 @@
           <Property Name="start_time" Type="int" />
           <Property Name="end_time" Type="int" />
         </EntityType>
-        <EntityType Name="User">
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="faculty" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="final_grade" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -51,33 +61,32 @@
           <Property Name="num_of_action" Type="int" Nullable="false" />
         </EntityType>
         <EntityContainer Name="masterModelStoreContainer">
-          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee_shift" EntityType="Self.Employee_shift" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="masterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="masterEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="masterModel.Department" />
+          <EntitySet Name="Employee_shift" EntityType="masterModel.Employee_shift" />
+          <EntitySet Name="Employees" EntityType="masterModel.Employee" />
+          <EntitySet Name="Shifts" EntityType="masterModel.Shift" />
+          <EntitySet Name="Students" EntityType="masterModel.Student" />
+          <EntitySet Name="Users" EntityType="masterModel.User" />
+        </EntityContainer>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="manager_id" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="first_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="last_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="start_work_year" Type="Int32" Nullable="false" />
-          <Property Name="department_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Employee_shift">
           <Key>
@@ -86,6 +95,16 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="employee_id" Type="Int32" Nullable="false" />
           <Property Name="shift_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="start_work_year" Type="Int32" Nullable="false" />
+          <Property Name="department_id" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Shift">
           <Key>
@@ -96,23 +115,26 @@
           <Property Name="start_time" Type="Int32" />
           <Property Name="end_time" Type="Int32" />
         </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="faculty" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="final_grade" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="full_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="full_name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="num_of_action" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="masterEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Departments" EntityType="Self.Department" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
-          <EntitySet Name="Employee_shift" EntityType="Self.Employee_shift" />
-          <EntitySet Name="Shifts" EntityType="Self.Shift" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -121,51 +143,62 @@
         <EntityContainerMapping StorageEntityContainer="masterModelStoreContainer" CdmEntityContainer="masterEntities">
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="masterModel.Department">
-              <MappingFragment StoreEntitySet="Department">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="name" ColumnName="name" />
+              <MappingFragment StoreEntitySet="Departments">
                 <ScalarProperty Name="manager_id" ColumnName="manager_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="masterModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="first_name" ColumnName="first_name" />
-                <ScalarProperty Name="last_name" ColumnName="last_name" />
-                <ScalarProperty Name="start_work_year" ColumnName="start_work_year" />
-                <ScalarProperty Name="department_id" ColumnName="department_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Employee_shift">
             <EntityTypeMapping TypeName="masterModel.Employee_shift">
               <MappingFragment StoreEntitySet="Employee_shift">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
                 <ScalarProperty Name="shift_id" ColumnName="shift_id" />
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="masterModel.Employee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="department_id" ColumnName="department_id" />
+                <ScalarProperty Name="start_work_year" ColumnName="start_work_year" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Shifts">
             <EntityTypeMapping TypeName="masterModel.Shift">
-              <MappingFragment StoreEntitySet="Shift">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="start_time" ColumnName="start_time" />
+              <MappingFragment StoreEntitySet="Shifts">
                 <ScalarProperty Name="end_time" ColumnName="end_time" />
+                <ScalarProperty Name="start_time" ColumnName="start_time" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="masterModel.Student">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="final_grade" ColumnName="final_grade" />
+                <ScalarProperty Name="faculty" ColumnName="faculty" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="masterModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="full_name" ColumnName="full_name" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
+              <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="num_of_action" ColumnName="num_of_action" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

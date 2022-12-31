@@ -3,51 +3,62 @@
   <EntityContainerMapping StorageEntityContainer="masterModelStoreContainer" CdmEntityContainer="masterEntities">
     <EntitySetMapping Name="Departments">
       <EntityTypeMapping TypeName="masterModel.Department">
-        <MappingFragment StoreEntitySet="Department">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="name" ColumnName="name" />
+        <MappingFragment StoreEntitySet="Departments">
           <ScalarProperty Name="manager_id" ColumnName="manager_id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Employees">
-      <EntityTypeMapping TypeName="masterModel.Employee">
-        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="first_name" ColumnName="first_name" />
-          <ScalarProperty Name="last_name" ColumnName="last_name" />
-          <ScalarProperty Name="start_work_year" ColumnName="start_work_year" />
-          <ScalarProperty Name="department_id" ColumnName="department_id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Employee_shift">
       <EntityTypeMapping TypeName="masterModel.Employee_shift">
         <MappingFragment StoreEntitySet="Employee_shift">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
           <ScalarProperty Name="shift_id" ColumnName="shift_id" />
+          <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="masterModel.Employee">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="department_id" ColumnName="department_id" />
+          <ScalarProperty Name="start_work_year" ColumnName="start_work_year" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Shifts">
       <EntityTypeMapping TypeName="masterModel.Shift">
-        <MappingFragment StoreEntitySet="Shift">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="date" ColumnName="date" />
-          <ScalarProperty Name="start_time" ColumnName="start_time" />
+        <MappingFragment StoreEntitySet="Shifts">
           <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="masterModel.Student">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="final_grade" ColumnName="final_grade" />
+          <ScalarProperty Name="faculty" ColumnName="faculty" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="masterModel.User">
-        <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="full_name" ColumnName="full_name" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="password" ColumnName="password" />
+        <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="num_of_action" ColumnName="num_of_action" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="full_name" ColumnName="full_name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

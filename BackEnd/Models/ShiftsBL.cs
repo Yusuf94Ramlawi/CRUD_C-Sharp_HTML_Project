@@ -6,14 +6,6 @@ using System.Web;
 
 namespace FinalProject.Models
 {
-    public class Employeesshift
-    {
-        public int ID { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
-        public int shift_id { get; set; }
-    }
-
     public class ShiftsBL
     {
         new masterEntities db = new masterEntities();
@@ -45,7 +37,6 @@ namespace FinalProject.Models
             }
             catch { }
         }
-
 
 
     }

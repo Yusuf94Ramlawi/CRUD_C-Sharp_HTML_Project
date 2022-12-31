@@ -5,11 +5,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5da4056f3f834880880c2dac1f766691" Name="Diagram1">
-        <EntityTypeShape EntityType="masterModel.Department" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="masterModel.Employee" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="masterModel.Employee_shift" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="masterModel.Shift" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="masterModel.User" Width="1.5" PointX="5.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="masterModel.Department" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.Employee_shift" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.Employee" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="masterModel.Shift" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="masterModel.Student" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="masterModel.User" Width="1.5" PointX="4.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

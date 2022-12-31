@@ -20,7 +20,6 @@ namespace FinalProject.Models
 
         public List<EmployeeWithDepartment> GetEmployees()
         {
-
             List<EmployeeWithDepartment> employees = (from emp in db.Employees
                                         join dep in db.Departments
                                         on emp.department_id equals dep.ID

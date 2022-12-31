@@ -1,22 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="masterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="Department">
+  <EntityType Name="Departments">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="manager_id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="start_work_year" Type="int" Nullable="false" />
-    <Property Name="department_id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Employee_shift">
     <Key>
@@ -26,7 +16,17 @@
     <Property Name="employee_id" Type="int" Nullable="false" />
     <Property Name="shift_id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="Shift">
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="start_work_year" Type="int" Nullable="false" />
+    <Property Name="department_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Shifts">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -35,7 +35,17 @@
     <Property Name="start_time" Type="int" />
     <Property Name="end_time" Type="int" />
   </EntityType>
-  <EntityType Name="User">
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="first_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="last_name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="faculty" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="final_grade" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -46,10 +56,11 @@
     <Property Name="num_of_action" Type="int" Nullable="false" />
   </EntityType>
   <EntityContainer Name="masterModelStoreContainer">
-    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Employee_shift" EntityType="Self.Employee_shift" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Shift" EntityType="Self.Shift" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Shifts" EntityType="Self.Shifts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

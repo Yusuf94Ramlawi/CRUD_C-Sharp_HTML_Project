@@ -26,9 +26,10 @@ namespace FinalProject.Models
         }
     
         public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Employee_shift> Employee_shift { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Shift> Shifts { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }
 }

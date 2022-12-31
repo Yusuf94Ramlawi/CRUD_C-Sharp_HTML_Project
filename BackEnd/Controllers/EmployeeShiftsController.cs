@@ -15,9 +15,9 @@ namespace FinalProject.Controllers
         EmployeeShiftsBL bl = new EmployeeShiftsBL();
 
         // GET: api/EmployeeShifts
-        public IEnumerable<string> Get()
+        public IEnumerable<Employeesshift> Get()
         {
-            return new string[] { "value1", "value2" };
+            return bl.GetEmployeesShifts();
         }
 
         // GET: api/EmployeeShifts/5
@@ -28,8 +28,9 @@ namespace FinalProject.Controllers
         }
 
         // POST: api/EmployeeShifts
-        public void Post([FromBody]string value)
+        public void Post(Employee_shift empShift)
         {
+            bl.AddEmployeeShifts(empShift);
         }
 
         // PUT: api/EmployeeShifts/5
@@ -40,6 +41,7 @@ namespace FinalProject.Controllers
         // DELETE: api/EmployeeShifts/5
         public void Delete(int id)
         {
+            bl.DeleteEmployeeShifts(id);
         }
     }
 }
