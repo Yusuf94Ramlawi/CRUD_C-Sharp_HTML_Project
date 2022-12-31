@@ -12,7 +12,6 @@
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 
 </head>
-
 <body class="text-center">
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
@@ -46,11 +45,28 @@
     </header>
     <main class="container">
         <br>
-<div id="employeeDiv"></div>
+<h1 id="employeeDiv"></h1>
 <hr>
-<div id="ShiftsTable"></div>
+<!-- <div id="ShiftsTable"></div> -->
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+            </tr>
+        </thead>
+        <tbody id="ShiftsTable">
+        </tbody>
+    </table>
+</div>
 
-<button onclick="SaveData();">Save..</button>
+<div class="d-grid gap-2">
+    <input type="button" class="btn btn-primary btn-block" onclick="SaveData();" value="Save.." />
+</div>
 
     </main>
     <script src="checkUser.js"></script>
@@ -61,8 +77,8 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const employeeID = urlParams.get('id');
-        employeeDiv.innerText = `ID: ${employeeID} - USERNAME: XX`;
-
+        const employeeName = urlParams.get('firstName') + " " + urlParams.get('lastName');
+        employeeDiv.innerText = `Employee ID: ${employeeID}  |  Employee Name: ${employeeName}`;
 
         function getCheckedCheckboxesFor() {
             var checkboxes = document.querySelectorAll('input[name="Shifts"]:checked'), values = [];
@@ -83,17 +99,24 @@
             var ShiftsData = await response.json();
 
             await ShiftsData.forEach(async Shifts => {
-                span = document.createElement("span")
+                tr = document.createElement("tr")
+                checkboxTd = document.createElement("td")
                 inputCheckBox = document.createElement("input")
                 inputCheckBox.setAttribute("type","checkbox")
                 inputCheckBox.setAttribute("name", "Shifts")
                 inputCheckBox.setAttribute("value", Shifts.ID)
+                checkboxTd.appendChild(inputCheckBox)
 
-                labelCheckBox = document.createElement("label")
-                labelCheckBox.innerText = `${Shifts.ID} | ${Shifts.date} - ${Shifts.start_time}-${Shifts.end_time}`
-                labelCheckBox.setAttribute("for", "Shifts")
+                IDtd = document.createElement("td")
+                IDtd.innerText = Shifts.ID
+                datetd = document.createElement("td")
+                datetd.innerText = Shifts.date
+                start_timetd = document.createElement("td")
+                start_timetd.innerText = Shifts.start_time
+                end_timetd = document.createElement("td")
+                end_timetd.innerText = Shifts.end_time
+
                 
-                br = document.createElement("br")
 
                 data2.forEach(employeesShifts => {
                     if (employeesShifts.ID == employeeID && employeesShifts.shift_id == Shifts.ID) {
@@ -101,11 +124,12 @@
                     }
                 })
 
-                span.appendChild(inputCheckBox)
-                span.appendChild(labelCheckBox)
-                span.appendChild(br)
-
-                ShiftsTable.appendChild(span);
+                tr.appendChild(checkboxTd)
+                tr.appendChild(IDtd)
+                tr.appendChild(datetd)
+                tr.appendChild(start_timetd)
+                tr.appendChild(end_timetd)
+                ShiftsTable.appendChild(tr);
 
             });
         };

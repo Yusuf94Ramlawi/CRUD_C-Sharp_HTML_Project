@@ -200,7 +200,7 @@
                 EmployeesAddShiftButton.type = "button"
                 EmployeesAddShiftButton.innerText = "Add Shift"
                 EmployeesAddShiftButton.classList = "btn btn-info"
-                EmployeesAddShiftButton.setAttribute("onclick", `window.location.href = "add_emp_shift.html?id=${Employees.ID}"`);
+                EmployeesAddShiftButton.setAttribute("onclick", `window.location.href = "add_emp_shift.html?id=${Employees.ID}&firstName=${Employees.first_name}&lastName=${Employees.last_name}"`);
 
                 Tools.appendChild(EmployeesAddShiftButton);
                 Tools.appendChild(EmployeesEditButton);
