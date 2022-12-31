@@ -19,12 +19,12 @@ namespace FinalProject.Models
             catch { return null; }
         }
 
-        public User EditUser(int id, User user)
+        public User EditUser(int id)
         {
             try
             {
                 var CurrentUser = masterEntities.Users.Where(x => x.ID == id).First();
-                CurrentUser.num_of_action = user.num_of_action;
+                CurrentUser.num_of_action = CurrentUser.num_of_action + 1;
                 masterEntities.SaveChanges();
 
                 return CurrentUser;

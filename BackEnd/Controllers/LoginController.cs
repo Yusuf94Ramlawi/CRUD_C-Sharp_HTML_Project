@@ -22,9 +22,9 @@ namespace FinalProject.Controllers
             return isUser;
         }
 
-        public void Put(int id, User user)
+        public User Put(int id)
         {
-            bl.EditUser(id, user);
+            return bl.EditUser(id);
         }
     }
 }

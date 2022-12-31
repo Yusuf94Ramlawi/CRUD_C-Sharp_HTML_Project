@@ -162,7 +162,7 @@
                 ShiftsTable.appendChild(tr);
                 
             });
-
+            AddAction();
         };
 
 
@@ -187,7 +187,7 @@
             alert("Added.");
 
             GetData()
-            sessionStorage.setItem("number_of_action", +sessionStorage.getItem("number_of_action") + 1);
+            AddAction();
 
         }
 
