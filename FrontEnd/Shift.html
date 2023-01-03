@@ -35,11 +35,12 @@
                             <a class="nav-link" href="Department.html">Departments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="Shift.html">Shifts <span class="visually-hidden">(current)</span></a>
+                            <a class="nav-link active" href="Shift.html">Shifts <span
+                                    class="visually-hidden">(current)</span></a>
                         </li>
                     </ul>
                     <h3 class="text-white" id="username"></h3>
-                <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
+                    <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
                 </div>
             </div>
         </nav>
@@ -48,10 +49,10 @@
         <br>
         <div class="row">
             <div class="col">
-            <div class="d-grid gap-2">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
-                    onclick="newModal();">Add Shifts</button>
-            </div>
+                <div class="d-grid gap-2">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
+                        onclick="newModal();">Add Shifts</button>
+                </div>
             </div>
             <div class="col"></div>
             <div class="col"></div>
@@ -141,7 +142,7 @@
 
                 var response2 = await fetch(`http://localhost:51911/api/EmployeeShifts/${Shifts.ID}`);
                 var data2 = await response2.json();
-                if(data2 != null){
+                if (data2 != null) {
                     var shiftUl = document.createElement("ul");
                     data2.forEach(employee => {
                         var li = document.createElement("li");
@@ -160,7 +161,7 @@
                 tr.appendChild(shiftList);
 
                 ShiftsTable.appendChild(tr);
-                
+
             });
             AddAction();
         };
@@ -193,7 +194,7 @@
 
         GetData()
 
-    username.innerText = `Hello ${userSession.full_name}`;
+        username.innerText = `Hello ${userSession.full_name}`;
     </script>
     <footer>
         <!-- place footer here -->

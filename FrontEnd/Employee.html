@@ -29,7 +29,8 @@
                             <a class="nav-link" href="index.html" aria-current="page">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="Employee.html">Employees <span class="visually-hidden">(current)</span></a>
+                            <a class="nav-link active" href="Employee.html">Employees <span
+                                    class="visually-hidden">(current)</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Department.html">Departments</a>
@@ -38,54 +39,54 @@
                             <a class="nav-link" href="Shift.html">Shifts</a>
                         </li>
                     </ul>
-                <h3 class="text-white" id="username"></h3>
-                <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
+                    <h3 class="text-white" id="username"></h3>
+                    <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
                 </div>
             </div>
         </nav>
     </header>
     <main class="container">
         <br>
-    
+
         <form action="emp_search.html" method="get">
             <div class="row">
-            <div class="mb-3 col">
-              <label for="first_name_search" class="form-label">First Name</label>
-              <input type="text"
-                class="form-control" name="first_name_search" id="first_name_search" aria-describedby="for_first_name_search" placeholder="FirstName">
-              <small id="for_first_name_search" class="form-text text-muted">enter for search</small>
+                <div class="mb-3 col">
+                    <label for="first_name_search" class="form-label">First Name</label>
+                    <input type="text" class="form-control" name="first_name_search" id="first_name_search"
+                        aria-describedby="for_first_name_search" placeholder="FirstName">
+                    <small id="for_first_name_search" class="form-text text-muted">enter for search</small>
+                </div>
+                <div class="mb-3 col">
+                    <label for="last_name_search" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" name="last_name_search" id="last_name_search"
+                        aria-describedby="for_last_name_search" placeholder="lastName">
+                    <small id="for_last_name_search" class="form-text text-muted">enter for search</small>
+                </div>
+                <div class="mb-3 col">
+                    <label for="department_search" class="form-label">Department</label>
+                    <input type="text" class="form-control" name="department_search" id="department_search"
+                        aria-describedby="for_department_search" placeholder="Department">
+                    <small id="for_department_search" class="form-text text-muted">enter for search</small>
+                </div>
+                <div class="mb-3 col" style="align-self: center;">
+                    <input class="button btn btn-primary" type="submit" value="Search..." type="submit">
+                </div>
             </div>
-            <div class="mb-3 col">
-                <label for="last_name_search" class="form-label">Last Name</label>
-                <input type="text" class="form-control" name="last_name_search" id="last_name_search"
-                    aria-describedby="for_last_name_search" placeholder="lastName">
-                <small id="for_last_name_search" class="form-text text-muted">enter for search</small>
-            </div>
-            <div class="mb-3 col">
-                <label for="department_search" class="form-label">Department</label>
-                <input type="text" class="form-control" name="department_search" id="department_search"
-                    aria-describedby="for_department_search" placeholder="Department">
-                <small id="for_department_search" class="form-text text-muted">enter for search</small>
-            </div>
-            <div class="mb-3 col" style="align-self: center;">
-                <input class="button btn btn-primary" type="submit" value="Search..." type="submit">
-            </div>
-            </div>
-        
+
         </form>
         <hr>
-<div class="row">
-    <div class="col">
-        <div class="d-grid gap-2">
-            <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
-                onclick="newModal();">Add Employees</button>
+        <div class="row">
+            <div class="col">
+                <div class="d-grid gap-2">
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalId" class="btn btn-primary"
+                        onclick="newModal();">Add Employees</button>
+                </div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col"></div>
         </div>
-    </div>
-    <div class="col">
-    </div>
-    <div class="col"></div>
-</div>
-<hr>
+        <hr>
         <br><br>
         <div class="table-responsive">
             <table class="table table-hover">
@@ -205,8 +206,8 @@
                 Tools.appendChild(EmployeesAddShiftButton);
                 Tools.appendChild(EmployeesEditButton);
                 Tools.appendChild(EmployeesDeleteButton);
-                
-                if(Employees.shifts != null){
+
+                if (Employees.shifts != null) {
                     var shiftUl = document.createElement("ul");
                     Employees.shifts.forEach(async shiftID => {
                         var shiftResponse = await fetch(`http://localhost:51911/api/shifts/${shiftID.shift_id}`);
@@ -232,17 +233,17 @@
         };
 
         async function GetDepartment() {
-                var department_id = document.getElementById("department_id")
-                var response = await fetch("http://localhost:51911/api/Department");
-                var department = await response.json();
-                department.forEach(dep => {
-                    var optionEl = document.createElement("option")
-                    optionEl.setAttribute("value", dep.ID);
-                    var t = document.createTextNode(dep.name);
-                    optionEl.appendChild(t);
-                    department_id.appendChild(optionEl)
-                });
-            }
+            var department_id = document.getElementById("department_id")
+            var response = await fetch("http://localhost:51911/api/Department");
+            var department = await response.json();
+            department.forEach(dep => {
+                var optionEl = document.createElement("option")
+                optionEl.setAttribute("value", dep.ID);
+                var t = document.createTextNode(dep.name);
+                optionEl.appendChild(t);
+                department_id.appendChild(optionEl)
+            });
+        }
 
         async function newModal() {
             document.getElementById("ID").value = "";
@@ -274,7 +275,7 @@
                 });
             }
 
-            
+
 
             GetData()
             AddAction();

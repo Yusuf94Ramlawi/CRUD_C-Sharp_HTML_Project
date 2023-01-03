@@ -39,7 +39,7 @@
                         </li>
                     </ul>
                     <h3 class="text-white" id="username"></h3>
-                <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
+                    <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
                 </div>
             </div>
         </nav>
@@ -47,15 +47,15 @@
     <main class="container">
         <br>
         <div class="row">
-        ID <input type="text" name="ID" id="ID" disabled>
-        first_name <input type="text" name="first_name" id="first_name">
-        last_name <input type="text" name="last_name" id="last_name">
-        start_work_year <input type="number" name="start_work_year" id="start_work_year">
-        department_id 
+            ID <input type="text" name="ID" id="ID" disabled>
+            first_name <input type="text" name="first_name" id="first_name">
+            last_name <input type="text" name="last_name" id="last_name">
+            start_work_year <input type="number" name="start_work_year" id="start_work_year">
+            department_id
             <select class="form-select form-select-md" name="department_id" id="department_id">
             </select>
         </div>
-        
+
         <!-- <input type="number" name="department_id" id="department_id"> -->
 
         <button type="button" onclick="window.location.href = 'Employee.html'" class="btn btn-secondary">Back</button>
@@ -86,8 +86,8 @@
                 optionEl.setAttribute("value", dep.ID);
                 var t = document.createTextNode(dep.name);
                 optionEl.appendChild(t);
-                
-                if(dep.ID == id){
+
+                if (dep.ID == id) {
                     optionEl.selected = true;
                 }
                 department_id.appendChild(optionEl)
@@ -104,7 +104,7 @@
             await fetch(`http://localhost:51911/api/Employees/${ID}`, {
                 method: "PUT",
                 headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({"first_name": new_first_name, "last_name": new_last_name, "start_work_year": new_start_work_year, "department_id": new_department_id })
+                body: JSON.stringify({"first_name": new_first_name, "last_name": new_last_name, "start_work_year": new_start_work_year, "department_id": new_department_id})
             });
             alert("Saved.")
             AddAction();
