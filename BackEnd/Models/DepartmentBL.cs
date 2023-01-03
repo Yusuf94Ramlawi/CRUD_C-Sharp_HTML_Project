@@ -16,7 +16,7 @@ namespace FinalProject.Models
 
     public class DepartmentBL
     {
-        masterEntities db = new masterEntities();
+        public static masterEntities db = new masterEntities();
 
         public List<Departments> GetDepartments()
         {

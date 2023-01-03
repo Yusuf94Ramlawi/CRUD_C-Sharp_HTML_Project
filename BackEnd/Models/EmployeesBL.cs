@@ -16,7 +16,7 @@ namespace FinalProject.Models
     }
     public class EmployeesBL
     {
-        masterEntities db = new masterEntities();
+        public static masterEntities db = new masterEntities();
 
         public List<EmployeeWithDepartment> GetEmployees()
         {

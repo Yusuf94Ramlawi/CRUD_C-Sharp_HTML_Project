@@ -15,25 +15,40 @@
 <style>
   .card:hover {
     border: 2px solid black;
-}
-a:link { text-decoration: none; }
-a:visited { text-decoration: none; }
-a:hover { text-decoration: none; }
-a:active { text-decoration: none; }
+  }
+
+  a:link {
+    text-decoration: none;
+  }
+
+  a:visited {
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+  a:active {
+    text-decoration: none;
+  }
 </style>
-  <body class="text-center">
+
+<body class="text-center">
   <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-        <div class="container">
+      <div class="container">
         <a class="navbar-brand" href="#">Factory management</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-          aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+          aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavId">
           <ul class="navbar-nav me-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+              <a class="nav-link active" href="#" aria-current="page">Home <span
+                  class="visually-hidden">(current)</span></a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="Employee.html">Employees</a>
@@ -46,65 +61,65 @@ a:active { text-decoration: none; }
             </li>
           </ul>
           <h3 class="text-white" id="username"></h3>
-                <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
+          <button type="button" onclick="logOut();" class="btn btn-danger">Logout</button>
         </div>
       </div>
     </nav>
   </header>
   <main class="container">
     <br>
-        <h1> Welcome To Our Project </h1>
+    <h1> Welcome To Our Project </h1>
     <hr>
-        <div class="row">
-          <div class="col">
-            <a href="Employee.html">
-              <div class="card text-white bg-primary">
-                <img style="align-self: center ;" height="75px" width="75px"
-                  src="https://cdn3.iconfinder.com/data/icons/hr-recruitment-management-part-2/400/Popular-11-512.png">
-                <div class="card-body">
-                  <h4 class="card-title">Employees Page</h4>
-                  <p class="card-text">Employee's details with add/edit/delete option</p>
-                </div>
-              </div>
-            </a>
+    <div class="row">
+      <div class="col">
+        <a href="Employee.html">
+          <div class="card text-white bg-primary">
+            <img style="align-self: center ;" height="75px" width="75px"
+              src="https://cdn3.iconfinder.com/data/icons/hr-recruitment-management-part-2/400/Popular-11-512.png">
+            <div class="card-body">
+              <h4 class="card-title">Employees Page</h4>
+              <p class="card-text">Employee's details with add/edit/delete option</p>
+            </div>
           </div>
-          <div class="col">
-            <a href="Department.html">
-              <div class="card text-white bg-secondary">
-                <img style="align-self: center ;" height="75px" width="75px"
-                  src="https://icons.veryicon.com/png/o/internet--web/billion-square-cloud/department-1.png">
-                <div class="card-body">
-                  <h4 class="card-title">Departments Page</h4>
-                  <p class="card-text">Department's details with add/edit/delete option</p>
-                </div>
-              </div>
-            </a>
+        </a>
+      </div>
+      <div class="col">
+        <a href="Department.html">
+          <div class="card text-white bg-secondary">
+            <img style="align-self: center ;" height="75px" width="75px"
+              src="https://icons.veryicon.com/png/o/internet--web/billion-square-cloud/department-1.png">
+            <div class="card-body">
+              <h4 class="card-title">Departments Page</h4>
+              <p class="card-text">Department's details with add/edit/delete option</p>
+            </div>
           </div>
-          <div class="col">
-            <a href="Shift.html">
-              <div class="card text-white bg-primary">
-                <img style="align-self: center ;" height="75px" width="75px"
-                  src="https://cdn3.iconfinder.com/data/icons/hr-and-recruitment/100/shift_employee_rota_clock_watch-512.png">
-                <div class="card-body">
-                  <h4 class="card-title">Shifts Page</h4>
-                  <p class="card-text">Shift's details with add/edit/delete option</p>
-                </div>
-              </div>
-              </div>
-            </a>
-        </div>
+        </a>
+      </div>
+      <div class="col">
+        <a href="Shift.html">
+          <div class="card text-white bg-primary">
+            <img style="align-self: center ;" height="75px" width="75px"
+              src="https://cdn3.iconfinder.com/data/icons/hr-and-recruitment/100/shift_employee_rota_clock_watch-512.png">
+            <div class="card-body">
+              <h4 class="card-title">Shifts Page</h4>
+              <p class="card-text">Shift's details with add/edit/delete option</p>
+            </div>
+          </div>
+      </div>
+      </a>
+    </div>
   </main>
-<script src="checkUser.js"></script>
+  <script src="checkUser.js"></script>
   <script>
     username.innerText = `Hello ${userSession.full_name}`;
   </script>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
     integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+    </script>
 </body>
 
 </html>

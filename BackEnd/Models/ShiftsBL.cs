@@ -8,7 +8,7 @@ namespace FinalProject.Models
 {
     public class ShiftsBL
     {
-        new masterEntities db = new masterEntities();
+        public static masterEntities db = new masterEntities();
 
         public List<Shift> GetShifts()
         {
