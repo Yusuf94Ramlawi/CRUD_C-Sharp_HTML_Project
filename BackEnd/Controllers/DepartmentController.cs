@@ -12,7 +12,7 @@ namespace FinalProject.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DepartmentController : ApiController
     {
-        public static DepartmentBL bl = new DepartmentBL();
+        DepartmentBL bl = new DepartmentBL();
 
         // GET: api/Department
         public IEnumerable<Departments> Get()

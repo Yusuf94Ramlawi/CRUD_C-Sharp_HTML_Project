@@ -15,7 +15,7 @@ namespace FinalProject.Models
 
     public class EmployeeShiftsBL
     {
-        masterEntities db = new masterEntities();
+        public static masterEntities db = new masterEntities();
 
         public List<Employeesshift> GetEmployeesShifts()
         {

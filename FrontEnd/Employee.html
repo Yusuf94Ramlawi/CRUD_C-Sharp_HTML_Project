@@ -159,7 +159,7 @@
 
             var response = await fetch("http://localhost:51911/api/Employees");
             var EmployeesData = await response.json();
-            EmployeesData.forEach(Employees => {
+            EmployeesData.forEach(async Employees => {
                 var tr = document.createElement("tr");
                 var EmployeesID_td = document.createElement("td");
                 EmployeesID_td.innerText = Employees.ID;

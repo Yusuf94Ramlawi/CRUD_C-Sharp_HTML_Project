@@ -51,7 +51,9 @@
           sessionStorage.setItem("user", JSON.stringify(isUser));
           var userSession = JSON.parse(sessionStorage.getItem("user"));
 
-          if (userSession.number_of_action > 8) {
+          alert(JSON.stringify(isUser))
+
+          if (userSession.num_of_action > 8) {
             alert("You Reach Your Maximum Actions Please try anotherday !")
           } else{
             window.location.href = "index.html";

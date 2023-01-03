@@ -8,7 +8,7 @@ namespace FinalProject.Models
 {
     public class LoginBL
     {
-        masterEntities masterEntities = new masterEntities();
+        public static masterEntities masterEntities = new masterEntities();
 
         public User CheckLogin(User login)
         {
@@ -24,7 +24,7 @@ namespace FinalProject.Models
             try
             {
                 var CurrentUser = masterEntities.Users.Where(x => x.ID == id).First();
-                CurrentUser.num_of_action = CurrentUser.num_of_action + 1;
+                CurrentUser.num_of_action++;
                 masterEntities.SaveChanges();
 
                 return CurrentUser;

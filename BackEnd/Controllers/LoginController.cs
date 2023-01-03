@@ -13,7 +13,7 @@ namespace FinalProject.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LoginController : ApiController
     {
-        public static LoginBL bl = new LoginBL();
+        LoginBL bl = new LoginBL();
         
         // POST: api/Login
         public User Post(User login)

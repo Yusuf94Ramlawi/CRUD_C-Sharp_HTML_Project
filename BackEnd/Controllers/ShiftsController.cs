@@ -12,7 +12,7 @@ namespace FinalProject.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ShiftsController : ApiController
     {
-        public static ShiftsBL bl = new ShiftsBL();
+        ShiftsBL bl = new ShiftsBL();
 
         // GET: api/Shifts
         public IEnumerable<Shift> Get()
